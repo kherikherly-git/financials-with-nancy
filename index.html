@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financials with Nancy - Financial Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h1>💰 Nancy</h1>
+                <p>Financial Manager</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" data-module="dashboard" class="nav-link active">Dashboard</a></li>
+                <li><a href="#" data-module="registration" class="nav-link">Registration</a></li>
+                <li><a href="#" data-module="savings" class="nav-link">Savings</a></li>
+                <li><a href="#" data-module="loans" class="nav-link">Loans</a></li>
+                <li><a href="#" data-module="payment" class="nav-link">Loan Payment</a></li>
+                <li><a href="#" data-module="withdraw" class="nav-link">Withdrawals</a></li>
+                <li><a href="#" data-module="reports" class="nav-link">Reports</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <h2 id="page-title">Dashboard</h2>
+                <div class="user-info">
+                    <span id="current-user">Guest</span>
+                    <button id="logout-btn" class="btn-logout">Logout</button>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+
+                <!-- Dashboard Module -->
+                <section id="dashboard" class="module active">
+                    <div class="dashboard-grid">
+                        <div class="card stats-card">
+                            <h3>Total Users</h3>
+                            <p class="stat-number" id="total-users">0</p>
+                        </div>
+                        <div class="card stats-card">
+                            <h3>Total Savings</h3>
+                            <p class="stat-number" id="total-savings">$0.00</p>
+                        </div>
+                        <div class="card stats-card">
+                            <h3>Total Loans</h3>
+                            <p class="stat-number" id="total-loans">$0.00</p>
+                        </div>
+                        <div class="card stats-card">
+                            <h3>Outstanding Loans</h3>
+                            <p class="stat-number" id="outstanding-loans">$0.00</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Registration Module -->
+                <section id="registration" class="module">
+                    <div class="card">
+                        <h2>User Registration</h2>
+                        <form id="registration-form">
+                            <div class="form-group">
+                                <label for="full-name">Full Name:</label>
+                                <input type="text" id="full-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone:</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address:</label>
+                                <input type="text" id="address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="occupation">Occupation:</label>
+                                <input type="text" id="occupation" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Register</button>
+                        </form>
+                    </div>
+                    <div id="users-list" class="card" style="margin-top: 20px;">
+                        <h2>Registered Users</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Savings Module -->
+                <section id="savings" class="module">
+                    <div class="card">
+                        <h2>Savings Management</h2>
+                        <form id="savings-form">
+                            <div class="form-group">
+                                <label for="savings-user">Select User:</label>
+                                <select id="savings-user" required>
+                                    <option value="">-- Select a user --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="savings-amount">Savings Amount ($):</label>
+                                <input type="number" id="savings-amount" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="savings-type">Savings Type:</label>
+                                <select id="savings-type" required>
+                                    <option value="regular">Regular Savings</option>
+                                    <option value="fixed">Fixed Deposit</option>
+                                    <option value="emergency">Emergency Fund</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary">Add to Savings</button>
+                        </form>
+                    </div>
+                    <div id="savings-list" class="card" style="margin-top: 20px;">
+                        <h2>Savings Records</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="savings-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Loans Module -->
+                <section id="loans" class="module">
+                    <div class="card">
+                        <h2>Loan Management</h2>
+                        <form id="loans-form">
+                            <div class="form-group">
+                                <label for="loan-user">Select User:</label>
+                                <select id="loan-user" required>
+                                    <option value="">-- Select a user --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="loan-amount">Loan Amount ($):</label>
+                                <input type="number" id="loan-amount" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loan-period">Loan Period (months):</label>
+                                <input type="number" id="loan-period" min="1" max="60" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="interest-rate">Interest Rate (%):</label>
+                                <input type="number" id="interest-rate" step="0.01" min="0" value="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loan-purpose">Loan Purpose:</label>
+                                <input type="text" id="loan-purpose" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Disburse Loan</button>
+                        </form>
+                    </div>
+                    <div id="loans-list" class="card" style="margin-top: 20px;">
+                        <h2>Active Loans</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Principal</th>
+                                    <th>Interest Rate</th>
+                                    <th>Period</th>
+                                    <th>Balance</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="loans-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Loan Payment Module -->
+                <section id="payment" class="module">
+                    <div class="card">
+                        <h2>Loan Payment</h2>
+                        <form id="payment-form">
+                            <div class="form-group">
+                                <label for="payment-user">Select User:</label>
+                                <select id="payment-user" required>
+                                    <option value="">-- Select a user --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="loan-to-pay">Select Loan:</label>
+                                <select id="loan-to-pay" required>
+                                    <option value="">-- Select a loan --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="payment-amount">Payment Amount ($):</label>
+                                <input type="number" id="payment-amount" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="payment-method">Payment Method:</label>
+                                <select id="payment-method" required>
+                                    <option value="cash">Cash</option>
+                                    <option value="bank">Bank Transfer</option>
+                                    <option value="cheque">Cheque</option>
+                                    <option value="online">Online Payment</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary">Record Payment</button>
+                        </form>
+                    </div>
+                    <div id="payments-list" class="card" style="margin-top: 20px;">
+                        <h2>Payment History</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payments-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Withdrawal Module -->
+                <section id="withdraw" class="module">
+                    <div class="card">
+                        <h2>Withdrawal Management</h2>
+                        <form id="withdraw-form">
+                            <div class="form-group">
+                                <label for="withdraw-user">Select User:</label>
+                                <select id="withdraw-user" required>
+                                    <option value="">-- Select a user --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="available-balance">Available Balance:</label>
+                                <input type="text" id="available-balance" disabled style="background: #f0f0f0;">
+                            </div>
+                            <div class="form-group">
+                                <label for="withdraw-amount">Withdrawal Amount ($):</label>
+                                <input type="number" id="withdraw-amount" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="withdraw-type">Withdrawal Type:</label>
+                                <select id="withdraw-type" required>
+                                    <option value="partial">Partial Withdrawal</option>
+                                    <option value="full">Full Withdrawal</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary">Process Withdrawal</button>
+                        </form>
+                    </div>
+                    <div id="withdrawals-list" class="card" style="margin-top: 20px;">
+                        <h2>Withdrawal History</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Amount</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="withdrawals-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Reports Module -->
+                <section id="reports" class="module">
+                    <div class="card">
+                        <h2>Financial Reports & Loan Follow-up</h2>
+                        <div class="report-filters">
+                            <div class="form-group">
+                                <label for="report-type">Report Type:</label>
+                                <select id="report-type">
+                                    <option value="loans-overview">Loans Overview</option>
+                                    <option value="overdue">Overdue Loans</option>
+                                    <option value="payment-schedule">Payment Schedule</option>
+                                    <option value="user-summary">User Summary</option>
+                                </select>
+                            </div>
+                            <button type="button" id="generate-report" class="btn-primary">Generate Report</button>
+                            <button type="button" id="print-report" class="btn-secondary">Print Report</button>
+                        </div>
+                    </div>
+                    <div id="report-output" class="card" style="margin-top: 20px;">
+                        <div id="report-content"></div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Success/Error Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
